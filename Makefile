@@ -1,23 +1,24 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -O3
+CFLAGS = -Wall -Wextra -O3 -I./sha256
 TARGET = rbgen
+
+SRCS = main.c sha256/basic_hashing.c
+OBJS = main.o sha256/basic_hashing.o
 
 all: $(TARGET)
 
-$(TARGET): main.o basic-hashing.o
-	$(CC) $(CFLAGS) -o $(TARGET) main.o basic-hashing.o
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
-main.o: main.c basic-hashing.h
-	$(CC) $(CFLAGS) -c main.c
+main.o: main.c sha256/basic_hashing.h
+	$(CC) $(CFLAGS) -c main.c -o main.o
 
-basic-hashing.o: basic-hashing.c basic-hashing.h
-	$(CC) $(CFLAGS) -c basic-hashing.c
+sha256/basic_hashing.o: sha256/basic_hashing.c sha256/basic_hashing.h
+	$(CC) $(CFLAGS) -c sha256/basic_hashing.c -o sha256/basic_hashing.o
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f *.o sha256/*.o $(TARGET)
 
 install: $(TARGET)
-	cp $(TARGET) /usr/local/bin/
-
-uninstall:
-	rm -f /usr/local/bin/$(TARGET)
+	mkdir -p $(HOME)/.local/bin
+	cp $(TARGET) $(HOME)/.local/bin/
