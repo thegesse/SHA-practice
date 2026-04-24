@@ -15,7 +15,7 @@ Small tool to create rainbow tables from a txt file in C.
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/thegesse/SHA-practice.git](https://github.com/thegesse/SHA-practice.git)
+   git clone https://github.com/thegesse/SHA-practice.git
    cd SHA-practice
 2. **Build and install locally**
     ```bash
